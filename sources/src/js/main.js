@@ -1,108 +1,66 @@
-// ========== INIT FILES READ
+// ========== INIT VIDEO
 
-// check images amount
-
-var checkImagesAmount = () => {
-    var container = document.querySelector(".file");
-
-    if (!container) return;
-
-    if (container.children.length > 1) {
-        container.classList.add("file-non-empty");
-    } else {
-        container.classList.remove("file-non-empty");
-    }
-};
-
-var handleRemoveImage = (e) => {
-    var deleting_item = e.target.closest(".file__img");
-    deleting_item.remove();
-    checkImagesAmount();
-};
-
-// init files read
-
-var handleAddFiles = (files, label) => {
-    if (!files.length) return;
-
-    var queuedImagesArray = Array.from(files).filter(
-        (f) => f.type.startsWith("image/") && f.size < 1 * 1024 * 1024
-    );
-
-    queuedImagesArray.forEach((image) => {
-        // create image item and add className
-        var elem = document.createElement("DIV");
-        elem.classList.add("file__img");
-
-        // add innerHTML to image item
-        elem.innerHTML = `<img src="${URL.createObjectURL(
-            image
-        )}" alt="фото отзыва"><button class="file__remove" type="button" aria-label="Удалить фото"></button>`;
-
-        // add image item to the DOM
-        label.parentElement.append(elem);
-
-        // add listener to remove_btn
-        elem.querySelector(".file__remove").addEventListener(
-            "click",
-            handleRemoveImage
-        );
-
-        checkImagesAmount();
-    });
-};
-
-// add images by click
-
-var initFileRead = () => {
-    var file_label = document.querySelector(".file__label");
-    var file_input = document.querySelector(".file__input");
-
-    if (!file_label || !file_input) return;
-
-    file_input.addEventListener("change", () =>
-        handleAddFiles(file_input.files, file_label)
-    );
-};
-
-// add images by drag and drop
-var initFileReadByDrop = () => {
-    var drop_container = document.querySelector(".file");
-
-    if (!drop_container) return;
-
-    var file_input = document.querySelector(".file__input");
-    var label = document.querySelector(".file__label");
-
-    drop_container.addEventListener("dragover", (e) => {
-        e.preventDefault();
-    });
-
-    drop_container.addEventListener("dragenter", (e) => {
-        e.preventDefault();
-    });
-
-    // when file is inside drag area
-    drop_container.addEventListener("dragover", (event) => {
-        event.preventDefault();
-        drop_container.classList.add("active");
-    });
-    // when file leave the drag area
-    drop_container.addEventListener("dragleave", () => {
-        drop_container.classList.remove("active");
-    });
-
-    var handleDrop = (e) => {
-        e.preventDefault();
-
-        file_input.files = e.dataTransfer.files;
-
-        drop_container.classList.remove("active");
-
-        handleAddFiles(file_input.files, label);
+var initYoutubeVideo = (videos) => {
+    // generate video url
+    var generateUrl = (id) => {
+        var query = "?rel=0&showinfo=0&autoplay=1";
+        // var query = "?ps=docs&controls=1";
+        return "https://www.youtube.com/embed/" + id + query;
     };
 
-    drop_container.addEventListener("drop", handleDrop);
+    // create iframe element
+    var createIframe = (id) => {
+        var iframe = document.createElement("iframe");
+        iframe.classList.add("video-iframe");
+        iframe.setAttribute("src", generateUrl(id));
+        iframe.setAttribute("title", "YouTube video player");
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute(
+            "allow",
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
+        );
+
+        return iframe;
+    };
+
+    // handling each video element
+    videos.forEach((el) => {
+        var videoHref = el.dataset.video;
+        var deletedLength = "https://youtu.be/".length;
+
+        var videoId = videoHref.substring(deletedLength, videoHref.length);
+
+        var parent = el.parentElement;
+
+        var videoPlayBtn = parent.querySelector(".video-play-btn");
+
+        videoPlayBtn.addEventListener("click", () => {
+            var iframe = createIframe(videoId);
+            parent.querySelector(".video-preview").remove();
+            el.append(iframe);
+        });
+    });
+};
+
+// ========== TOGGLE POLICY
+
+var togglePolicy = () => {
+    var policy = document.querySelector(".policy");
+    var show_btn = document.querySelector(".footer__policy");
+    var close_btn = document.querySelectorAll(".close-policy");
+
+    show_btn.addEventListener("click", () => {
+        policy.classList.add("active");
+        document.body.classList.add("lock");
+    });
+
+    close_btn.forEach((el) => {
+        el.addEventListener("click", () => {
+            policy.classList.remove("active");
+            document.body.classList.remove("lock");
+        });
+    });
 };
 
 // ========== FORM VALIDATION
@@ -164,46 +122,10 @@ var checkErorrs = (formElements) => {
     return !isErrorConsist;
 };
 
-var initFormValidation = () => {
-    var feedback = document.querySelector(".feedback");
-    var form = document.querySelector(".feedback__form");
-
-    if (!feedback || !form) return;
-
-    var inputs = form.querySelectorAll(".feedback__input");
-    var t_areas = form.querySelectorAll(".feedback__textarea");
-
-    var formElements = [...inputs, ...t_areas];
-
-    formElements.length > 0 && initInputCheck(formElements);
-
-    var emailInputs = formElements.filter((el) => el.type === "email");
-
-    var phoneInputs = formElements.filter((el) => el.name === "user_phone");
-
-    if (phoneInputs.length > 0) {
-        // init mask inputs
-        const { MaskInput } = Maska;
-        const maskIinput = new MaskInput("[data-maska]");
-    }
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        doFormValidation(formElements, emailInputs, phoneInputs);
-
-        var checkResult = checkErorrs(formElements);
-
-        if (checkResult) {
-            form.reset();
-
-            feedback.classList.add("success");
-        }
-    });
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-    initFileRead();
-    initFileReadByDrop();
-    initFormValidation();
+    // get all video elements on the page
+    var videos = Array.from(document.querySelectorAll(".video-block"));
+    videos.length > 0 && initYoutubeVideo(videos);
+
+    togglePolicy();
 });

@@ -1,0 +1,44 @@
+.intro {
+    margin-bottom: 150px;
+
+    @include md {
+        margin-bottom: 100px;
+    }
+
+    @include xs {
+        margin-bottom: 80px;
+    }
+}
+
+.intro__container {
+    position: relative;
+    max-width: 2400px;
+    margin: 0 auto;
+
+    &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        padding-top: 38.85%;
+
+        @include xxs {
+            padding-top: 99.23%;
+        }
+    }
+
+    picture {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

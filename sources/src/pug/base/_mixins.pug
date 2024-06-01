@@ -34,11 +34,45 @@ mixin pictureSizeWithoutLazy(name,ext,x2,width,height)
     if !x2
         picture.picture.object-fit-cover
             source.object-fit-cover(srcset="images/" + name + ".webp" type="image/webp")
-            img.picture__img.object-fit-cover(src="images/" + name + "." + ext alt="" width= width height= height)
+            img.picture__img.object-fit-cover(src="images/" + name + "." + ext alt="" width= width height= height  decoding="async")
     else
         picture.picture.object-fit-cover
             source.object-fit-cover(srcset="images/" + name + ".webp, images/" + name + "@2x.webp 2x" type="image/webp")
-            img.picture__img.object-fit-cover(src="images/" + name + "." + ext srcset="images/" + name + "." + ext + ", images/" + name + "@2x." + ext + " 2x" alt="" width= width height= height)
+            img.picture__img.object-fit-cover(src="images/" + name + "." + ext srcset="images/" + name + "." + ext + ", images/" + name + "@2x." + ext + " 2x" alt="" width= width height= height decoding="async")
+
+mixin pictureSizeWithoutLazyMedia(nameMax, nameMin,ext,x2,width,height, max, min)
+    if !x2
+        picture.picture.object-fit-cover
+            source.object-fit-cover(media="(min-width:" + max + "px)" srcset="images/" + nameMax + ".webp" type="image/webp")
+            source.object-fit-cover(media="(max-width:" + min + "px)" srcset="images/" + nameMin + ".webp" type="image/webp")
+            img.picture__img.object-fit-cover(src="images/" + nameMax + "." + ext alt="" width= width height= height  decoding="async")
+    else
+        picture.picture.object-fit-cover
+            source.object-fit-cover(media="(min-width:" + max + "px)" srcset="images/" + nameMax + ".webp, images/" + nameMax + "@2x.webp 2x" type="image/webp")
+            source.object-fit-cover(media="(max-width:" + min + "px)" srcset="images/" + nameMin + ".webp, images/" + nameMin + "@2x.webp 2x" type="image/webp")
+            img.picture__img.object-fit-cover(src="images/" + nameMax + "." + ext srcset="images/" + nameMin + "." + ext + ", images/" + nameMax + "@2x." + ext + " 2x" alt="" width= width height= height  decoding="async")
+
+mixin pictureSizetLazy(name,ext,x2,width,height)
+    if !x2
+        picture.picture.object-fit-cover
+            source.object-fit-cover(srcset="images/" + name + ".webp" type="image/webp")
+            img.picture__img.object-fit-cover(src="images/" + name + "." + ext alt="" width= width height= height  decoding="async" loading="lazy")
+    else
+        picture.picture.object-fit-cover
+            source.object-fit-cover(srcset="images/" + name + ".webp, images/" + name + "@2x.webp 2x" type="image/webp")
+            img.picture__img.object-fit-cover(src="images/" + name + "." + ext srcset="images/" + name + "." + ext + ", images/" + name + "@2x." + ext + " 2x" alt="" width= width height= height decoding="async" loading="lazy")
+
+mixin pictureSizeLazyMedia(nameMax, nameMin,ext,x2,width,height, max, min)
+    if !x2
+        picture.picture.object-fit-cover
+            source.object-fit-cover(media="(min-width:" + max + "px)" srcset="images/" + nameMax + ".webp" type="image/webp")
+            source.object-fit-cover(media="(max-width:" + min + "px)" srcset="images/" + nameMin + ".webp" type="image/webp")
+            img.picture__img.object-fit-cover(src="images/" + nameMax + "." + ext alt="" width= width height= height  decoding="async" loading="lazy")
+    else
+        picture.picture.object-fit-cover
+            source.object-fit-cover(media="(min-width:" + max + "px)" srcset="images/" + nameMax + ".webp, images/" + nameMax + "@2x.webp 2x" type="image/webp")
+            source.object-fit-cover(media="(max-width:" + min + "px)" srcset="images/" + nameMin + ".webp, images/" + nameMin + "@2x.webp 2x" type="image/webp")
+            img.picture__img.object-fit-cover(src="images/" + nameMax + "." + ext srcset="images/" + nameMin + "." + ext + ", images/" + nameMax + "@2x." + ext + " 2x" alt="" width= width height= height  decoding="async" loading="lazy")
 
 
 mixin pictureNew(name, ext, altText, big_size, mid_size, sm_size, width, height, customClass)

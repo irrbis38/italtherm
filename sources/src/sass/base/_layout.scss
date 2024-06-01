@@ -39,18 +39,18 @@ body {
     background-color: var(--color-white, #fff);
 }
 
-// body.lock {
-//     overflow: hidden;
-// }
+body.lock {
+    overflow: hidden;
+}
 
 .container {
     width: 100%;
-    max-width: 1500px;
+    max-width: 1580px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 40px;
 
-    @include min_sm {
-        padding: 0 30px;
+    @include xs {
+        padding: 0 20px;
     }
 }
 

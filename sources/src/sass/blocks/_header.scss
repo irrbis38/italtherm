@@ -1,0 +1,29 @@
+.header {
+    background-color: var(--color-green-bg, #40a22b);
+    background: $gradient_bg;
+}
+
+.header__container {
+    max-width: 1734px;
+    min-height: 137px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include sm {
+        min-height: 75px;
+        padding: 0 20px;
+    }
+}
+
+.header__logo {
+    display: block;
+    width: 425px;
+    height: auto;
+    transform: translateY(-10px);
+
+    @include sm {
+        width: 244px;
+    }
+}
