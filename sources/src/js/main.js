@@ -49,12 +49,14 @@ var initYoutubeVideo = (videos) => {
 
 var togglePolicy = () => {
     var policy = document.querySelector(".policy");
-    var show_btn = document.querySelector(".footer__policy");
+    var show_btns = document.querySelectorAll(".show-policy");
     var close_btn = document.querySelectorAll(".close-policy");
 
-    show_btn.addEventListener("click", () => {
-        policy.classList.add("active");
-        document.body.classList.add("lock");
+    show_btns.forEach((el) => {
+        el.addEventListener("click", () => {
+            policy.classList.add("active");
+            document.body.classList.add("lock");
+        });
     });
 
     close_btn.forEach((el) => {
