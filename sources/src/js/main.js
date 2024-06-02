@@ -1,3 +1,5 @@
+"use strict";
+
 // ========== INIT VIDEO
 
 var initYoutubeVideo = (videos) => {
@@ -73,7 +75,7 @@ var initInputCheck = (formElements) => {
     });
 };
 
-var doFormValidation = (formElements, emailInputs, phoneInputs) => {
+var doFormValidation = (formElements) => {
     var requiredElements = formElements.filter((el) => {
         return el.required;
     });
@@ -86,33 +88,6 @@ var doFormValidation = (formElements, emailInputs, phoneInputs) => {
                 el.classList.remove("error");
             }
         });
-
-    emailInputs.length > 0 &&
-        emailInputs.forEach((el) => {
-            // return if empty
-            if (!el.value) return;
-
-            var re =
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-            if (!re.test(String(el.value).toLowerCase())) {
-                el.classList.add("error");
-            } else {
-                el.classList.remove("error");
-            }
-        });
-
-    phoneInputs.length > 0 &&
-        phoneInputs.forEach((el) => {
-            // return if empty
-            if (!el.value) return;
-
-            if (el.value.length === 16) {
-                el.classList.remove("error");
-            } else {
-                el.classList.add("error");
-            }
-        });
 };
 
 var checkErorrs = (formElements) => {
@@ -122,10 +97,38 @@ var checkErorrs = (formElements) => {
     return !isErrorConsist;
 };
 
+var initFormValidation = (feedback) => {
+    var form = document.querySelector(".feedback__form");
+
+    if (!form) return;
+
+    var inputs = Array.from(form.querySelectorAll(".feedback__input"));
+
+    inputs.length > 0 && initInputCheck(inputs);
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        doFormValidation(inputs);
+
+        var checkResult = checkErorrs(inputs);
+
+        if (checkResult) {
+            form.reset();
+
+            feedback.classList.add("success");
+        }
+    });
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     // get all video elements on the page
     var videos = Array.from(document.querySelectorAll(".video-block"));
     videos.length > 0 && initYoutubeVideo(videos);
 
     togglePolicy();
+
+    // init form validation
+    var feedback = document.querySelector(".feedback");
+    feedback && initFormValidation(feedback);
 });

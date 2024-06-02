@@ -52,7 +52,7 @@ mixin pictureSizeWithoutLazyMedia(nameMax, nameMin,ext,x2,width,height, max, min
             source.object-fit-cover(media="(max-width:" + min + "px)" srcset="images/" + nameMin + ".webp, images/" + nameMin + "@2x.webp 2x" type="image/webp")
             img.picture__img.object-fit-cover(src="images/" + nameMax + "." + ext srcset="images/" + nameMin + "." + ext + ", images/" + nameMax + "@2x." + ext + " 2x" alt="" width= width height= height  decoding="async")
 
-mixin pictureSizetLazy(name,ext,x2,width,height)
+mixin pictureSizeLazy(name,ext,x2,width,height)
     if !x2
         picture.picture.object-fit-cover
             source.object-fit-cover(srcset="images/" + name + ".webp" type="image/webp")
