@@ -270,6 +270,13 @@ body.lock {
     padding: 0 20px
   }
 }
+@media (max-width:767px) {
+  .header__container {
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center
+  }
+}
 .header__logo {
   display: block;
   width: 425px;
@@ -570,6 +577,7 @@ body.lock {
 .geo__rating {
   width: 181px;
   height: 32px;
+  display: block;
   background: url(../images/geo/rating_stars.svg) center/contain no-repeat
 }
 @media (max-width:1200px) {
