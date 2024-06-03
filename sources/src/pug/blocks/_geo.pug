@@ -7,7 +7,11 @@
     .geo__map
         .container
             .geo__img
-                img(src="./images/geo/map.svg", alt="Карта присутствия продукции Italtherm в мире" loading="lazy" decoding="async" width="1500" height="905")
+                //- img(src="./images/geo/map.svg", alt="Карта присутствия продукции Italtherm в мире" loading="lazy" decoding="async" width="1500" height="905")
+
+                picture(class="picture object-fit-cover")
+                    source(class="object-fit-cover" srcset= "./images/geo/map.webp, ./images/geo/map@2x.webp 2x" type="image/webp")
+                    img(class="picture__img object-fit-cover" src= "./images/geo/map.jpg" srcset= "./images/geo/map.jpg, ./images/geo/map@2x.jpg 2x" alt="Карта присутствия продукции Italtherm в мире" width="1500" height="905" decoding="async" loading="lazy")
 
 
     .geo__bottom

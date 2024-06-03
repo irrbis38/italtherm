@@ -15,6 +15,10 @@
         min-height: 75px;
         padding: 0 20px;
     }
+
+    @include xs {
+        justify-content: center;
+    }
 }
 
 .header__logo {

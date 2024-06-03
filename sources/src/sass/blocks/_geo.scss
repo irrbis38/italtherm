@@ -161,6 +161,7 @@
 .geo__rating {
     width: 181px;
     height: 32px;
+    display: block;
     background: url("../images/geo/rating_stars.svg") center / contain no-repeat;
 
     @include md {

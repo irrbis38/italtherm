@@ -62,7 +62,7 @@ section.platforms.section
                     picture(class="picture object-fit-cover")
                         source(class="object-fit-cover" media="(min-width:768px)" srcset= "./images/platforms/" + item.img + ".webp, ./images/platforms/" + item.img + "@2x.webp 2x" type="image/webp"  width= item.width height="439")
                         source(class="object-fit-cover" media="(max-width:767px)" srcset= "./images/platforms/" + item.img + "-mob.webp, ./images/platforms/" + item.img + "-mob@2x.webp 2x" type="image/webp"  width="350" height="207")
-                        img(class="picture__img object-fit-cover" src= "./images/platforms/" + item.img + ".jpg" srcset= "./images/platforms/" + item.img + "-mob.jpg, ./images/platforms/" + item.img + "@2x.jpg 2x" alt="" width= item.width height="439" decoding="async" loading="lazy")
+                        img(class="picture__img object-fit-cover" src= "./images/platforms/" + item.img + ".jpg" srcset= "./images/platforms/" + item.img + ".jpg, ./images/platforms/" + item.img + "@2x.jpg 2x" alt="" width= item.width height="439" decoding="async" loading="lazy")
 
                     span.platforms__name(class=(item.color === 'dark' && 'platforms__name--dark'))= item.name
 
