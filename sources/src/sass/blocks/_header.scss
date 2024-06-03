@@ -29,5 +29,6 @@
 
     @include sm {
         width: 244px;
+        transform: translateY(-5px);
     }
 }
