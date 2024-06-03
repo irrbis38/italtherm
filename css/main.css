@@ -286,7 +286,9 @@ body.lock {
 }
 @media (max-width:991px) {
   .header__logo {
-    width: 244px
+    width: 244px;
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px)
   }
 }
 .main {
@@ -1151,7 +1153,7 @@ body.lock {
     grid-template-columns: repeat(2,1fr);
     grid-template-areas: "logo social" "phone email" "copyrigth policy";
     gap: 30px 20px;
-    padding: 12px 20px 29px
+    padding: 30px 20px 29px
   }
 }
 @media (max-width:767px) {
