@@ -42,3 +42,29 @@
         color: #41a62b;
     }
 }
+
+.info_new {
+    margin-bottom: 150px;
+
+    @include md {
+        margin-bottom: 100px;
+    }
+
+    @include xs {
+        margin-bottom: 70px;
+    }
+
+    .info__title {
+        span:nth-child(1) {
+            margin-bottom: 45px;
+        }
+
+        @include xs {
+            line-height: 75%;
+
+            span:nth-child(1) {
+                margin-bottom: 18px;
+            }
+        }
+    }
+}

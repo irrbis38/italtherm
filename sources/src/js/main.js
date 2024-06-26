@@ -84,7 +84,12 @@ var doFormValidation = (formElements) => {
 
     requiredElements.length > 0 &&
         requiredElements.forEach((el) => {
-            if (!el.value) {
+            if (
+                el.dataset.maska &&
+                el.value.length !== el.dataset.maska.length
+            ) {
+                el.classList.add("error");
+            } else if (!el.value) {
                 el.classList.add("error");
             } else {
                 el.classList.remove("error");
@@ -123,6 +128,18 @@ var initFormValidation = (feedback) => {
     });
 };
 
+var addMask = () => {
+    // init mask inputs
+    var initMaskaInput = () => {
+        const { MaskInput } = Maska;
+        const maskIinput = new MaskInput("[data-maska]");
+    };
+
+    var maskedInput = document.querySelectorAll("[data-maska]");
+
+    maskedInput && initMaskaInput();
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     // get all video elements on the page
     var videos = Array.from(document.querySelectorAll(".video-block"));
@@ -133,4 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // init form validation
     var feedback = document.querySelector(".feedback");
     feedback && initFormValidation(feedback);
+
+    // init mask
+    addMask();
 });

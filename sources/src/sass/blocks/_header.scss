@@ -32,3 +32,63 @@
         transform: translateY(-5px);
     }
 }
+
+// header for neww landing
+
+.header_new {
+    .header__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include sm {
+            min-height: 137px;
+        }
+
+        @include xs {
+            display: block;
+            padding-top: 18px;
+            padding-bottom: 24px;
+        }
+    }
+
+    .header__logo {
+        @include xs {
+            margin: 0 auto 18px;
+        }
+    }
+
+    .header__info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px 0;
+    }
+
+    .header__work {
+        font-weight: 400;
+        font-size: 25px;
+        letter-spacing: 0.03em;
+        text-align: right;
+        color: var(--color-white-fc, #fcfcfc);
+
+        @include xs {
+            font-size: 16px;
+            text-align: center;
+        }
+    }
+
+    .header__tel {
+        display: inline-block;
+        font-weight: 600;
+        font-size: 35px;
+        letter-spacing: 0.03em;
+        text-align: right;
+        color: var(--color-white-fc, #fcfcfc);
+        text-decoration: none;
+
+        @include xs {
+            font-size: 23px;
+            text-align: center;
+        }
+    }
+}

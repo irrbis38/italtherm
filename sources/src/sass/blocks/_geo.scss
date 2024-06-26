@@ -174,3 +174,38 @@
         height: 17px;
     }
 }
+
+// new landing
+.geo_new {
+    .geo__top {
+        background-color: transparent;
+
+        @include xs {
+            padding-bottom: 50px;
+        }
+    }
+
+    .geo__title {
+        text-align: left;
+        color: var(--color-dark, #090909);
+    }
+
+    .geo__img {
+        max-width: 1128px;
+        margin-left: 125px;
+
+        @include xl {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @include sm {
+            max-width: 100%;
+        }
+    }
+
+    .geo__map {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+}

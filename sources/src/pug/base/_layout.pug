@@ -34,12 +34,19 @@ html(lang="ru")
 
     body
         block header
-            include ../blocks/_header
+            if pageName == "new-landing"
+                include ../blocks/_header_new
+            else
+                include ../blocks/_header
 
         block main
             include ../blocks/_main
 
         block footer
-            include ../blocks/_footer
+            if pageName == "new-landing"
+                include ../blocks/_footer_new
+            else
+                include ../blocks/_footer
+
         block js
             script(src="js/main.min.js")

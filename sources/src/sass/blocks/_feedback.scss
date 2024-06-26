@@ -117,7 +117,7 @@
 
     @media (hover: hover) {
         &:hover {
-            box-shadow: 0 0 10px 0 var(--color-white-fc, #fcfcfc);
+            box-shadow: 0 0 10px 5px var(--color-white-fc, #fcfcfc);
         }
     }
 
